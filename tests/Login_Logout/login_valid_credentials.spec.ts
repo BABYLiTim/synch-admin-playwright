@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test'
 // Write a test
 test('Login with valid credentials', async ({ page }) => {
     await test.step('Navigate to the login page', async () => {
-        await page.goto('https://test-admin.widebridgecloud.com/');
+        await page.goto('/'); // This will use baseURL from config
         await page.getByText('Login').click();
     });
 
@@ -15,7 +15,7 @@ test('Login with valid credentials', async ({ page }) => {
     });
 
     await test.step('Validate successful login', async () => {
-    // Validate web page title
-    await expect(page).toHaveURL('https://test-admin.widebridgecloud.com/#/org/orgxnwj69/users');
+        // Use relative URL, Playwright will resolve it with baseURL
+        await expect(page).toHaveURL('/#/org/orgxnwj69/users');
     });
 });
