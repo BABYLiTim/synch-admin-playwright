@@ -18,4 +18,11 @@ test('Login with valid credentials', async ({ page }) => {
         // Use relative URL, Playwright will resolve it with baseURL
         await expect(page).toHaveURL('/#/org/orgxnwj69/users');
     });
+
+    await test.step('Logout', async () => {
+        const profileButton = page.locator('a.user-profile.dropdown-toggle');
+        await profileButton.click();    
+        await page.getByText('Log Out').click();
+        await expect(page).toHaveURL('/#/login');
+    });
 });
